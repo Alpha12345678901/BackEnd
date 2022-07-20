@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from ..save_moves.apis.save_to_db import insert_db
+from save_moves.apis.save_to_db import insert_db
 
 # for get requests use: http://127.0.0.1:8000/save_moves/chessgamelog
 # CHECK IF FILTERING WORKS

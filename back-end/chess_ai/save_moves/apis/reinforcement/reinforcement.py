@@ -2,8 +2,8 @@ import chess
 import random
 
 class Reinforcement:
-    def __init__(self, board, aiColor):
-        self.board = board
+    def __init__(self, aiColor):
+        self.board = chess.Board()
         self.legal_moves = []
         self.aiColor = aiColor
 

@@ -4,18 +4,15 @@ from ..models import ChessGameLog
 from .minimax.minimax import Minimax
 from .reinforcement.reinforcement import Reinforcement
 
+minimaxWhiteAI = Minimax('white')
+minimaxBlackAI = Minimax('black')
+reinforcementWhiteAI = Reinforcement('white')
+reinforcementBlackAI = Reinforcement('black')
 
 def insert_db(requestDict):
     id = requestDict['id']
 
     chessGameCurrent = ChessGameLog.objects.filter(id=id)
-
-    board = chess.Board()
-
-    minimaxWhiteAI = Minimax(board, 'white')
-    minimaxBlackAI = Minimax(board, 'black')
-    reinforcementWhiteAI = Reinforcement(board, 'white')
-    reinforcementBlackAI = Reinforcement(board, 'black')
 
     if not chessGameCurrent:
 
@@ -34,7 +31,6 @@ def insert_db(requestDict):
         whiteMoveLast = requestDict['whiteMoveLast']
         blackMoveLast = requestDict['blackMoveLast']
         '''
-        board = chess.Board()
 
         if requestDict['whiteAgentName'] == 'minimax':
             requestDict['whiteMoveLast'] = minimaxWhiteAI.aiMove()

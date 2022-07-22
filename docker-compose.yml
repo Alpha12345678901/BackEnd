@@ -13,7 +13,7 @@ services:
     volumes:
       - ./back-end:/code
     environment:
-      - SECRET_KEY=${SECRET_KEY}
+      - SECRET_KEY=${SECRET_KEY:?err}
       - DEBUG=${DEBUG}
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}

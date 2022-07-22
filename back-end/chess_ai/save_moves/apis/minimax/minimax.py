@@ -7,8 +7,11 @@ class Minimax:
         self.legal_moves = []
         self.aiColor = aiColor
 
-    def updateBoard(self, move):
-        self.board.push_san(move)
+    def updateBoard(self, move, notation='san'):
+        if notation == 'uci':
+            self.board.push(move)
+        else:
+            self.board.push_san(move)
 
     def aiMove(self):
         self.legal_moves.clear()
@@ -16,12 +19,14 @@ class Minimax:
         for move in self.board.legal_moves:
             self.legal_moves.append(move)
 
-        aiMove = chess.from_uci(random.choice(move))
+        aiMoveUCI = random.choice(self.legal_moves)
 
-        aiMoveSan = chess.san(aiMove)
+        self.updateBoard(aiMoveUCI, 'uci')
 
-        self.updateBoard(aiMoveSan)
+        aiMoveUCI = chess.Move.uci(aiMoveUCI)
 
-        return aiMoveSan
+        return aiMoveUCI
 
+    def displayBoard(self):
+        print(self.board)
 

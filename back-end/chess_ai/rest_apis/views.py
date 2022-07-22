@@ -13,14 +13,16 @@ from save_moves.apis.save_to_db import insert_db
 # http://127.0.0.1:8000/rest_apis/postdata
 @api_view(['POST'])
 def postData(request):
+    print("received input data for post request")
     print(request.method)
     print(request.data)
 
     requestDict = request.data
 
-    print(requestDict)
-
     insert_db(requestDict)
+
+    print("return value of post request")
+    print(requestDict)
 
     return Response(
         data=requestDict,

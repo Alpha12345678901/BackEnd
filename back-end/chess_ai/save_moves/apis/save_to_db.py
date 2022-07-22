@@ -10,11 +10,11 @@ reinforcementWhiteAI = Reinforcement('white')
 reinforcementBlackAI = Reinforcement('black')
 
 def insert_db(requestDict):
-    id = requestDict['id']
-
-    chessGameCurrent = ChessGameLog.objects.filter(id=id)
+    chessGameCurrent = ChessGameLog.objects.filter(token=requestDict['token'])
 
     if not chessGameCurrent:
+
+        print("trying to create a new game")
 
         '''
         whiteAgentName = requestDict['whiteAgentName']
@@ -32,14 +32,14 @@ def insert_db(requestDict):
         blackMoveLast = requestDict['blackMoveLast']
         '''
 
-        if requestDict['whiteAgentName'] == 'minimax':
+        if requestDict['whiteAgentName'] == 'minimax' and requestDict['turn'] == 'white':
             requestDict['whiteMoveLast'] = minimaxWhiteAI.aiMove()
-        elif requestDict['blackAgentName'] == 'minimax':
+        elif requestDict['blackAgentName'] == 'minimax' and requestDict['turn'] == 'black':
             minimaxBlackAI.updateBoard(requestDict['whiteMoveLast'])
             requestDict['blackMoveLast'] = minimaxBlackAI.aiMove()
-        elif requestDict['whiteAgentName'] == 'reinforcement':
+        elif requestDict['whiteAgentName'] == 'reinforcement' and requestDict['turn'] == 'white':
             requestDict['whiteMoveLast'] = reinforcementWhiteAI.aiMove()
-        elif requestDict['blackAgentName'] == 'reinforcement':
+        elif requestDict['blackAgentName'] == 'reinforcement' and requestDict['turn'] == 'black':
             reinforcementBlackAI.updateBoard(requestDict['whiteMoveLast'])
             requestDict['blackMoveLast'] = reinforcementBlackAI.aiMove()
 
@@ -50,20 +50,21 @@ def insert_db(requestDict):
 
     else:
 
-        if requestDict['whiteAgentName'] == 'minimax':
+        print("trying to update a current game")
+
+        if requestDict['whiteAgentName'] == 'minimax' and requestDict['turn'] == 'white':
             minimaxWhiteAI.updateBoard(requestDict['blackMoveLast'])
             requestDict['whiteMoveLast'] = minimaxWhiteAI.aiMove()
-        elif requestDict['blackAgentName'] == 'minimax':
+        elif requestDict['blackAgentName'] == 'minimax' and requestDict['turn'] == 'black':
             minimaxBlackAI.updateBoard(requestDict['whiteMoveLast'])
             requestDict['blackMoveLast'] = minimaxBlackAI.aiMove()
-        elif requestDict['whiteAgentName'] == 'reinforcement':
+        elif requestDict['whiteAgentName'] == 'reinforcement' and requestDict['turn'] == 'white':
             reinforcementWhiteAI.updateBoard(requestDict['blackMoveLast'])
             requestDict['whiteMoveLast'] = reinforcementWhiteAI.aiMove()
-        elif requestDict['blackAgentName'] == 'reinforcement':
+        elif requestDict['blackAgentName'] == 'reinforcement' and requestDict['turn'] == 'black':
             reinforcementBlackAI.updateBoard(requestDict['whiteMoveLast'])
             requestDict['blackMoveLast'] = reinforcementBlackAI.aiMove()
 
-        new_user_input = ChessGameLog.objects.update(**requestDict)
-        new_user_input.save()
+        ChessGameLog.objects.update(**requestDict)
 
         print("updated existing chess game data in postgres database")

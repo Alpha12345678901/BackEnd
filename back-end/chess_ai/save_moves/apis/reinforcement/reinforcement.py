@@ -7,6 +7,9 @@ class Reinforcement:
         self.legal_moves = []
         self.aiColor = aiColor
 
+    def reset(self):
+        self.board.reset()
+
     def updateBoard(self, move, notation='san'):
         if notation == 'uci':
             self.board.push(move)

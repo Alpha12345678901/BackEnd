@@ -16,21 +16,10 @@ def insert_db(requestDict):
 
         print("trying to create a new game")
 
-        '''
-        whiteAgentName = requestDict['whiteAgentName']
-        blackAgentName = requestDict['blackAgentName']
-        timeControl = requestDict['timeControl']
-        moves = requestDict['moves']
-        timeTracker = requestDict['timeTracker']
-        result = requestDict['result']
-        numberOfMoves = requestDict['numberOfMoves']
-        whiteMaterialLeftCurrent = requestDict['whiteMaterialLeftCurrent']
-        blackMaterialLeftCurrent = requestDict['blackMaterialLeftCurrent']
-        whiteTimeLeftCurrent = requestDict['whiteTimeLeftCurrent']
-        blackTimeLeftCurrent = requestDict['blackTimeLeftCurrent']
-        whiteMoveLast = requestDict['whiteMoveLast']
-        blackMoveLast = requestDict['blackMoveLast']
-        '''
+        minimaxWhiteAI.reset()
+        minimaxBlackAI.reset()
+        reinforcementWhiteAI.reset()
+        reinforcementBlackAI.reset()
 
         if requestDict['whiteAgentName'] == 'minimax' and requestDict['turn'] == 'white':
             requestDict['whiteMoveLast'] = minimaxWhiteAI.aiMove()

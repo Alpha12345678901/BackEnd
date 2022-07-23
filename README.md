@@ -29,7 +29,7 @@ Here is a sample raw JSON you can submit to the post API in Postman.
     "blackMoveLast": ""
 }
 
-Note that you can set either whiteAgentName or blackAgentName (or both) to minimax and/or reinforcement to call on the minimax and/or reinforcement AIs to play.
+Note that you can set either whiteAgentName or blackAgentName (or both) to minimax and/or reinforcement to call on the minimax and/or reinforcement AIs to play. Accorindgly, the output raw JSON of the post API would contain the AI's move in either whiteMoveLast or blackMoveLast depending on which color the AI was playing.
 
 Note that minimax and reinforcement AIs are currently not implemented, so random legal chess moves will be returned instead.
 

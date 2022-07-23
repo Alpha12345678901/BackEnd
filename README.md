@@ -56,4 +56,4 @@ For example, here is the resulting raw JSON from this get API call where we filt
     }
 ]
 
-Note that each unique token passed in to the post API corresponds to a unique chess game. Pass in an existing token if you want to update an existing game with the next player's move or a new tokenn for a new chess game.
+Note that each unique token passed in to the post API corresponds to a unique chess game. Pass in an existing token if you want to update an existing game with the next player's move or a new token for a new chess game.
